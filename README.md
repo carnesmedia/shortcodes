@@ -29,7 +29,7 @@ module ApplicationHelper
   include Shortcodes
 
   def wysiwyg_content(content)
-    shortcodes(content)
+    shortcode(content)
   end
 end
 ```
@@ -38,7 +38,7 @@ end
 
 ```ruby
 def wysiwyg_content(content)
-  Shortcodes.shortcodes(content)
+  Shortcodes.shortcode(content)
 end
 ```
 
