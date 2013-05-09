@@ -7,15 +7,15 @@ Gem::Specification.new do |spec|
   spec.name          = "shortcodes"
   spec.version       = Shortcodes::VERSION
   spec.authors       = ["Amiel Martin"]
-  spec.email         = ["amiel.martin@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.email         = ["amiel@carnesmedia.com"]
+  spec.description   = %q{Wordpress style shortcodes for your Ruby CMS}
+  spec.summary       = %q{Shortcodes is a simple ruby gem that will parse your cms content for wordpress style shortcodes.}
+  spec.homepage      = "https://github.com/carnesmedia/shortcodes"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files = Dir["lib/**/*"] + ["LICENSE.txt", "Rakefile", "README.md"]
+  # spec.test_files = Dir["spec/**/*"]
+
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"

@@ -1,6 +1,8 @@
 # Shortcodes
 
-TODO: Write a gem description
+Wordpress style shortcodes for your Ruby CMS.
+
+A simple ruby gem that will parse your cms content for wordpress style shortcodes.
 
 ## Installation
 
@@ -18,7 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails
+
+In your helpers:
+
+```ruby
+module ApplicationHelper
+  include Shortcodes
+
+  def wysiwyg_content(content)
+    shortcodes(content)
+  end
+end
+```
+
+### Otherwise
+
+```ruby
+def wysiwyg_content(content)
+  Shortcodes.shortcodes(content)
+end
+```
 
 ## Contributing
 
