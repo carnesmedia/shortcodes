@@ -5,10 +5,17 @@ describe Shortcodes do
     Shortcodes.should be_kind_of(Module)
   end
 
+  # TODO: We should really be parsing html and verifying attributes instead of comparing strings.
   def strip_whitespace(string)
     string.to_s.gsub(/\s+/, ' ')
   end
 
+  it 'handles wysiwyg confusion' do
+    content = '[youtube url="<a href="https://www.youtube.com/watch?v=jyOSP36sHx0">https://www.youtube.com/watch?v=jyOSP36sHx0</a>"]'
+    expected_content = '<iframe width="560" height="315" src="http://www.youtube.com/embed/jyOSP36sHx0" frameborder="0" allowfullscreen></iframe>'
+
+    Shortcodes.shortcode(content).should == expected_content
+  end
 
   it 'replaces a youtube shortcode' do
     content = '[youtube url="https://www.youtube.com/watch?v=jyOSP36sHx0"]'

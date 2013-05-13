@@ -1,5 +1,6 @@
 require "shortcodes/version"
 require 'nokogiri'
+require 'sanitize'
 
 module Shortcodes
 
@@ -53,7 +54,8 @@ module Shortcodes
 
   def self.shortcode(content)
     content.gsub(/\[[^\]]+\]/) do |code|
-      doc = Nokogiri::XML.parse(code.gsub(/^\[/, '<').gsub(/\]$/, '>'))
+      code = Sanitize.clean(code).gsub(/^\[/, '<').gsub(/\]$/, '>')
+      doc = Nokogiri::XML.parse(code)
       node = doc.root
       shortcode = node.name
 
