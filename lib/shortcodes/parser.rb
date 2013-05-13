@@ -2,8 +2,12 @@ require 'active_support/core_ext/class/attribute'
 
 module Shortcodes
   class Parser
+    autoload 'Nokogiri', 'nokogiri'
+    autoload 'Sanitize', 'sanitize'
+
     class_attribute :handlers
     class_attribute :default_handler
+    self.handlers ||= {}
 
     attr_reader :content
 
