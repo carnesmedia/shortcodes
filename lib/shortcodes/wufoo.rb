@@ -7,27 +7,25 @@ module Shortcodes
       new(shortcode).render
     end
 
-    View = Struct.new(:username, :formhash, :autoresize, :height, :header, :ssl)
+    View = Struct.new(:username, :formhash, :autoresize, :height, :header, :ssl) do
+      def self.new_with_attributes(attributes)
+        new(*attributes.values_at(*members.map(&:to_s)))
+      end
+    end
 
     attr_reader :shortcode
     def initialize(shortcode)
       @shortcode = shortcode
     end
 
-    def attributes
-      shortcode.attributes
-    end
-
-    # def view
-    #   View.new(attributes.values_at(*%w[username formhash autoresize height header ssl]))
-    # end
-
-
-    def render
+    def view
       erb = ERB.new(template)
       klass = erb.def_class(View)
-      view = klass.new(*attributes.values_at(*%w[username formhash autoresize height header ssl]))
 
+      klass.new_with_attributes(shortcode.attributes)
+    end
+
+    def render
       view.result
     end
 
