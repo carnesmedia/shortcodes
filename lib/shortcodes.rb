@@ -1,8 +1,8 @@
 require "shortcodes/version"
-require 'nokogiri'
-require 'sanitize'
 
 module Shortcodes
+  autoload 'Nokogiri', 'nokogiri'
+  autoload 'Sanitize', 'sanitize'
 
   HANDLERS = {
     'youtube' => 'youtube',
