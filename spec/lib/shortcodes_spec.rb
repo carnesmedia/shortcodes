@@ -10,6 +10,16 @@ describe Shortcodes do
     string.to_s.gsub(/\s+/, ' ')
   end
 
+  context 'with an unrecognized shortcode' do
+    # TODO: I'm not sure that removing unrecognized shortcodes is the best behaviour.
+    #   Should we leave it in place? Insert an HTML comment? This also brings up the question:
+    #   do we need the original shortcode to be provided to handlers?
+    it 'removes the shortcode' do
+      content = '[omgomgnotashortcode]'
+      Shortcodes.shortcode(content).should == ''
+    end
+  end
+
   it 'handles wysiwyg confusion' do
     content = '[youtube url="<a href="https://www.youtube.com/watch?v=jyOSP36sHx0">https://www.youtube.com/watch?v=jyOSP36sHx0</a>"]'
     expected_content = '<iframe width="560" height="315" src="http://www.youtube.com/embed/jyOSP36sHx0" frameborder="0" allowfullscreen></iframe>'
