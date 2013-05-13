@@ -2,9 +2,6 @@ require "shortcodes/version"
 
 require 'shortcodes/parser'
 
-require 'shortcodes/wufoo'
-require 'shortcodes/youtube'
-
 module Shortcodes
 
   def self.shortcode(content)
@@ -16,8 +13,5 @@ module Shortcodes
   end
 
   Parser.default_handler = ->(shortcode) { '' }
-
-  register_shortcode('youtube', Youtube)
-  register_shortcode('wufoo', Wufoo)
 end
 

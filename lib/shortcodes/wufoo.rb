@@ -33,5 +33,7 @@ module Shortcodes
       HTML
 
     end
+
+    Shortcodes.register_shortcode('wufoo', self)
   end
 end

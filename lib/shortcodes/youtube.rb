@@ -8,5 +8,7 @@ module Shortcodes
 
       '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % youtube_id
     end
+
+    Shortcodes.register_shortcode('youtube', self)
   end
 end
