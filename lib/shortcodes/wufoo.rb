@@ -1,38 +1,59 @@
+require 'erb'
+
 module Shortcodes
   class Wufoo
 
     def self.call(shortcode)
-      attributes = shortcode.attributes
+      new(shortcode).render
+    end
 
-      username = attributes['username']
-      formhash = attributes['formhash']
-      autoresize = attributes['autoresize']
-      height = attributes['height']
-      header = attributes['header']
-      ssl = attributes['ssl']
+    View = Struct.new(:username, :formhash, :autoresize, :height, :header, :ssl)
 
-      template = <<-HTML
-        <div id="wufoo-#{formhash}">
-           Fill out my <a href="http://#{username}.wufoo.com/forms/#{formhash}">online form</a>.
+    attr_reader :shortcode
+    def initialize(shortcode)
+      @shortcode = shortcode
+    end
+
+    def attributes
+      shortcode.attributes
+    end
+
+    # def view
+    #   View.new(attributes.values_at(*%w[username formhash autoresize height header ssl]))
+    # end
+
+
+    def render
+      erb = ERB.new(template)
+      klass = erb.def_class(View)
+      view = klass.new(*attributes.values_at(*%w[username formhash autoresize height header ssl]))
+
+      view.result
+    end
+
+    def template
+      <<-HTML
+        <div id="wufoo-<%= formhash %>">
+           Fill out my <a href="http://<%= username %>.wufoo.com/forms/<%= formhash %>">online form</a>.
         </div>
-        <script type="text/javascript">var #{formhash};(function(d, t) {
+        <script type="text/javascript">var <%= formhash %>;(function(d, t) {
         var s = d.createElement(t), options = {
-        'userName':'#{username}',
-        'formHash':'#{formhash}',
-        'autoResize':#{autoresize},
-        'height':'#{height}',
+        'userName':'<%= username %>',
+        'formHash':'<%= formhash %>',
+        'autoResize':<%= autoresize %>,
+        'height':'<%= height %>',
         'async':true,
-        'header':'#{header}',
-        'ssl':#{ssl}};
+        'header':'<%= header %>',
+        'ssl':<%= ssl %>};
         s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'wufoo.com/scripts/embed/form.js';
         s.onload = s.onreadystatechange = function() {
         var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-        try { #{formhash} = new WufooForm();#{formhash}.initialize(options);#{formhash}.display(); } catch (e) {}};
+        try { <%= formhash %> = new WufooForm();<%= formhash %>.initialize(options);<%= formhash %>.display(); } catch (e) {}};
         var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
         })(document, 'script');</script>
       HTML
-
     end
+
 
     Shortcodes.register_shortcode('wufoo', self)
   end
