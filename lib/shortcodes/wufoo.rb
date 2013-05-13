@@ -1,7 +1,9 @@
 module Shortcodes
   class Wufoo
 
-    def self.call(attributes)
+    def self.call(shortcode)
+      attributes = shortcode.attributes
+
       username = attributes['username']
       formhash = attributes['formhash']
       autoresize = attributes['autoresize']

@@ -1,7 +1,7 @@
 module Shortcodes
   class Youtube
-    def self.call(attributes)
-      url = attributes['url']
+    def self.call(shortcode)
+      url = shortcode.attributes['url']
 
       match = url.match(/(v=|youtu.be\/)(\w+)/)
       youtube_id = match ? match[2] : nil

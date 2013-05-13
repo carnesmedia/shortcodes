@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# Acceptance tests
 describe Shortcodes do
   it 'is a module (sanity check)' do
     Shortcodes.should be_kind_of(Module)
@@ -17,6 +18,11 @@ describe Shortcodes do
     it 'removes the shortcode' do
       content = '[omgomgnotashortcode]'
       Shortcodes.shortcode(content).should == ''
+    end
+
+    it 'keeps other content' do
+      content = 'some stuff [omgomgnotashortcode] other stuff'
+      Shortcodes.shortcode(content).should == 'some stuff  other stuff'
     end
   end
 
