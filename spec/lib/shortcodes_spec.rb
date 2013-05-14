@@ -6,20 +6,20 @@ describe Shortcodes do
     Shortcodes.should be_kind_of(Module)
   end
 
-
   context 'with an unrecognized shortcode' do
-    # TODO: I'm not sure that removing unrecognized shortcodes is the best behaviour.
-    #   Should we leave it in place? Insert an HTML comment? This also brings up the question:
-    #   do we need the original shortcode to be provided to handlers?
     it 'removes the shortcode' do
       content = '[omgomgnotashortcode]'
-      Shortcodes.shortcode(content).should == ''
+      expected_content = '<!-- Shortcodes: unknown shortcode [omgomgnotashortcode] -->'
+
+      Shortcodes.shortcode(content).should == expected_content
     end
 
     it 'keeps other content' do
       content = 'some stuff [omgomgnotashortcode] other stuff'
-      Shortcodes.shortcode(content).should == 'some stuff  other stuff'
+      expected_content = 'some stuff <!-- Shortcodes: unknown shortcode [omgomgnotashortcode] --> other stuff'
+      Shortcodes.shortcode(content).should == expected_content
     end
+
   end
 
   it 'replaces a youtube shortcode' do

@@ -12,6 +12,8 @@ module Shortcodes
     Parser.handlers[tag] = klass
   end
 
-  Parser.default_handler = ->(shortcode) { '' }
+  Parser.default_handler = ->(shortcode) do
+    "<!-- Shortcodes: unknown shortcode [#{shortcode.code}] -->"
+  end
 end
 

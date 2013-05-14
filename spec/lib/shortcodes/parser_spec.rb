@@ -28,7 +28,7 @@ describe Shortcodes::Parser do
     end
   end
 
-  it 'handles wysiwyg confusion' do
+  it 'handles possible wysiwyg confusion' do
     content = '[youtube url="<a href="https://www.youtube.com/watch?v=jyOSP36sHx0">https://www.youtube.com/watch?v=jyOSP36sHx0</a>"]'
     expected_content = '<iframe width="560" height="315" src="http://www.youtube.com/embed/jyOSP36sHx0" frameborder="0" allowfullscreen></iframe>'
 
