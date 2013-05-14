@@ -1,18 +1,7 @@
+require 'shortcodes/handler'
+
 module Shortcodes
-  class Youtube
-
-    def self.call(shortcode)
-      new(shortcode).render
-    end
-
-    attr_reader :shortcode
-    def initialize(shortcode)
-      @shortcode = shortcode
-    end
-
-    def attributes
-      shortcode.attributes
-    end
+  class Youtube < Handler
 
     def url
       # TODO: Provide a better interface for missing url

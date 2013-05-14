@@ -1,11 +1,8 @@
 require 'erb'
+require 'shortcodes/handler'
 
 module Shortcodes
-  class Wufoo
-
-    def self.call(shortcode)
-      new(shortcode).render
-    end
+  class Wufoo < Handler
 
     View = Struct.new(:username, :formhash, :autoresize, :height, :header, :ssl) do
       def self.new_with_attributes(attributes)
@@ -13,16 +10,11 @@ module Shortcodes
       end
     end
 
-    attr_reader :shortcode
-    def initialize(shortcode)
-      @shortcode = shortcode
-    end
-
     def view
       erb = ERB.new(template)
       klass = erb.def_class(View)
 
-      klass.new_with_attributes(shortcode.attributes)
+      klass.new_with_attributes(attributes)
     end
 
     def render
