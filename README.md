@@ -20,26 +20,33 @@ Or install it yourself as:
 
 ## Usage
 
-### Rails
-
-In your helpers:
-
 ```ruby
-module ApplicationHelper
-  include Shortcodes
-
-  def wysiwyg_content(content)
-    shortcode(content)
-  end
-end
+  Shortcodes.shortcode(content)
 ```
 
-### Otherwise
+## Built-in Shortcodes
 
-```ruby
-def wysiwyg_content(content)
-  Shortcodes.shortcode(content)
-end
+### Youtube
+
+Example:
+
+```
+[youtube url="https://www.youtube.com/watch?v=Gzj723LkRJY#t=3m21s"]
+```
+
+Attributes:
+
+* `url` - required
+* `width`, `height` - optional. defaults to 560x315
+
+### Wufoo
+
+Copying and pasting the Wufoo Wordpress shortcode should work.
+
+Example:
+
+```
+[wufoo username="awesome_user" formhash="a04909c" autoresize="true" height="961" header="show" ssl="true"]
 ```
 
 ## Contributing
