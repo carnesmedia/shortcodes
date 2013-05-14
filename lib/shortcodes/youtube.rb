@@ -1,12 +1,45 @@
 module Shortcodes
   class Youtube
+
     def self.call(shortcode)
-      url = shortcode.attributes['url']
+      new(shortcode).render
+    end
 
+    attr_reader :shortcode
+    def initialize(shortcode)
+      @shortcode = shortcode
+    end
+
+    def attributes
+      shortcode.attributes
+    end
+
+    def url
+      # TODO: Provide a better interface for missing url
+      url = shortcode.attributes.fetch('url')
+    end
+
+    def youtube_id
       match = url.match(/(v=|youtu.be\/)(\w+)/)
-      youtube_id = match ? match[2] : nil
 
-      '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % youtube_id
+      match ? match[2] : nil
+    end
+
+    def time
+      t = url[/(t=[0-9msh]+)/]
+      t ? "##{t}" : nil
+    end
+
+    def height
+      attributes.fetch('height', 315)
+    end
+
+    def width
+      attributes.fetch('width', 560)
+    end
+
+    def render
+      %Q{<iframe width="#{width}" height="#{height}" src="http://www.youtube.com/embed/#{youtube_id}#{time}" frameborder="0" allowfullscreen></iframe>}
     end
 
     Shortcodes.register_shortcode('youtube', self)
