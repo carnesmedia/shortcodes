@@ -6,8 +6,8 @@ require 'shortcodes/version'
 Gem::Specification.new do |spec|
   spec.name          = "shortcodes"
   spec.version       = Shortcodes::VERSION
-  spec.authors       = ["Amiel Martin"]
-  spec.email         = ["amiel@carnesmedia.com"]
+  spec.authors       = ["Amiel Martin", "Nathan Carnes"]
+  spec.email         = ["amiel@carnesmedia.com", "nathan@carnesmedia.com"]
   spec.description   = %q{Wordpress style shortcodes for your Ruby CMS}
   spec.summary       = %q{Shortcodes is a simple ruby gem that will parse your cms content for wordpress style shortcodes.}
   spec.homepage      = "https://github.com/carnesmedia/shortcodes"

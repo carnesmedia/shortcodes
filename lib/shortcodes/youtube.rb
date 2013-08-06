@@ -9,7 +9,7 @@ module Shortcodes
     end
 
     def youtube_id
-      match = url.match(/(v=|youtu.be\/)(\w+)/)
+      match = url.match(/(v=|youtu.be\/)([a-zA-Z0-9_-]{11}+)/)
 
       match ? match[2] : nil
     end

@@ -27,6 +27,16 @@ describe Shortcodes::Youtube do
     end
   end
 
+  context 'with a dash in the ID' do
+    let(:attributes) { { 'url' => 'http://www.youtube.com/watch?v=-EDor6UJuMI' } }
+
+    it 'generates a youtube embed code' do
+      expected_content = '<iframe width="560" height="315" src="http://www.youtube.com/embed/-EDor6UJuMI" frameborder="0" allowfullscreen></iframe>'
+
+      Shortcodes::Youtube.call(shortcode).should == expected_content
+    end
+  end
+
   context 'with a time in the url' do
     let(:attributes) { { 'url' => 'http://www.youtube.com/watch?v=jyOSP36sHx0#t=2m30s' } }
 
