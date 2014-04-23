@@ -28,7 +28,7 @@ module Shortcodes
     end
 
     def render
-      %Q{<iframe width="#{width}" height="#{height}" src="http://www.youtube.com/embed/#{youtube_id}#{time}" frameborder="0" allowfullscreen></iframe>}
+      %Q{<iframe width="#{width}" height="#{height}" src="//www.youtube.com/embed/#{youtube_id}#{time}" frameborder="0" allowfullscreen></iframe>}
     end
 
     Shortcodes.register_shortcode('youtube', self)

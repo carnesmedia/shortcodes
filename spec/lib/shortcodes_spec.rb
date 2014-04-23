@@ -24,7 +24,7 @@ describe Shortcodes do
 
   it 'replaces a youtube shortcode' do
     content = '[youtube url="https://www.youtube.com/watch?v=jyOSP36sHx0"]'
-    expected_content = '<iframe width="560" height="315" src="http://www.youtube.com/embed/jyOSP36sHx0" frameborder="0" allowfullscreen></iframe>'
+    expected_content = '<iframe width="560" height="315" src="//www.youtube.com/embed/jyOSP36sHx0" frameborder="0" allowfullscreen></iframe>'
 
     Shortcodes.shortcode(content).should == expected_content
   end
